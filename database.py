@@ -8,16 +8,18 @@ engine = create_async_engine(
 new_session = async_sessionmaker(engine, expire_on_commit=False)
 
 
+# Базовый класс для всех моделей
 class Model(DeclarativeBase):
     pass
 
 
+# Описание ORM модели для задачи
 class TaskOrm(Model):
     __tablename__ = "tasks"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str]
-    description: Mapped[str]
+    id: Mapped[int] = mapped_column(primary_key=True)  # Уникальный идентификатор
+    name: Mapped[str]                                  # Имя задачи
+    description: Mapped[str]                           # Описание задачи
 
 
 async def create_tables():
